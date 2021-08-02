@@ -13571,9 +13571,9 @@ Saving to: ‘../data/aclImdb_v1.tar.gz’
 <p><strong>Answer:</strong>
 the function does the following</p>
 <ol>
-<li>Remove any unnecessary characters and stopwords.</li>
-<li>Remove HTML tags.</li>
-<li>Convert to lower case.</li>
+<li>Removes any unnecessary characters and stopwords.</li>
+<li>Removes HTML tags.</li>
+<li>Converts to lower case.</li>
 </ol>
 
 </div>
@@ -14566,7 +14566,7 @@ Billable seconds: 282
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[30]:</div>
+<div class="prompt input_prompt">In&nbsp;[47]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># TODO: Deploy the trained model</span>
@@ -14589,6 +14589,7 @@ Billable seconds: 282
 <div class="output_subarea output_stream output_stderr output_text">
 <pre>Parameter image will be renamed to image_uri in SageMaker Python SDK v2.
 &#39;create_image_uri&#39; will be deprecated in favor of &#39;ImageURIProvider&#39; class in SageMaker Python SDK v2.
+Using already existing model: sagemaker-pytorch-2021-08-02-11-41-18-995
 </pre>
 </div>
 </div>
@@ -14609,7 +14610,7 @@ Billable seconds: 282
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[34]:</div>
+<div class="prompt input_prompt">In&nbsp;[48]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">predictor</span><span class="o">.</span><span class="n">endpoint</span>
@@ -14625,7 +14626,7 @@ Billable seconds: 282
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[34]:</div>
+    <div class="prompt output_prompt">Out[48]:</div>
 
 
 
@@ -14650,7 +14651,7 @@ Billable seconds: 282
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[31]:</div>
+<div class="prompt input_prompt">In&nbsp;[49]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">test_X</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">test_X_len</span><span class="p">),</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">test_X</span><span class="p">)],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
@@ -14663,7 +14664,7 @@ Billable seconds: 282
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[32]:</div>
+<div class="prompt input_prompt">In&nbsp;[50]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># We split the data into chunks and send each chunk seperately, accumulating the results.</span>
@@ -14684,11 +14685,25 @@ Billable seconds: 282
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[33]:</div>
+<div class="prompt input_prompt">In&nbsp;[51]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">predictions</span> <span class="o">=</span> <span class="n">predict</span><span class="p">(</span><span class="n">test_X</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
 <span class="n">predictions</span> <span class="o">=</span> <span class="p">[</span><span class="nb">round</span><span class="p">(</span><span class="n">num</span><span class="p">)</span> <span class="k">for</span> <span class="n">num</span> <span class="ow">in</span> <span class="n">predictions</span><span class="p">]</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[52]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">accuracy_score</span>
+<span class="n">accuracy_score</span><span class="p">(</span><span class="n">test_y</span><span class="p">,</span> <span class="n">predictions</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -14701,72 +14716,17 @@ Billable seconds: 282
 
 <div class="output_area">
 
-    <div class="prompt"></div>
+    <div class="prompt output_prompt">Out[52]:</div>
 
 
-<div class="output_subarea output_text output_error">
-<pre>
-<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
-<span class="ansi-red-fg">ModelError</span>                                Traceback (most recent call last)
-<span class="ansi-green-fg">&lt;ipython-input-33-46108efe51ea&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span>
-<span class="ansi-green-fg">----&gt; 1</span><span class="ansi-red-fg"> </span>predictions <span class="ansi-blue-fg">=</span> predict<span class="ansi-blue-fg">(</span>test_X<span class="ansi-blue-fg">.</span>values<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">      2</span> predictions <span class="ansi-blue-fg">=</span> <span class="ansi-blue-fg">[</span>round<span class="ansi-blue-fg">(</span>num<span class="ansi-blue-fg">)</span> <span class="ansi-green-fg">for</span> num <span class="ansi-green-fg">in</span> predictions<span class="ansi-blue-fg">]</span>
 
-<span class="ansi-green-fg">&lt;ipython-input-32-215b27c43941&gt;</span> in <span class="ansi-cyan-fg">predict</span><span class="ansi-blue-fg">(data, rows)</span>
-<span class="ansi-green-intense-fg ansi-bold">      5</span>     predictions <span class="ansi-blue-fg">=</span> np<span class="ansi-blue-fg">.</span>array<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">[</span><span class="ansi-blue-fg">]</span><span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">      6</span>     <span class="ansi-green-fg">for</span> array <span class="ansi-green-fg">in</span> split_array<span class="ansi-blue-fg">:</span>
-<span class="ansi-green-fg">----&gt; 7</span><span class="ansi-red-fg">         </span>predictions <span class="ansi-blue-fg">=</span> np<span class="ansi-blue-fg">.</span>append<span class="ansi-blue-fg">(</span>predictions<span class="ansi-blue-fg">,</span> predictor<span class="ansi-blue-fg">.</span>predict<span class="ansi-blue-fg">(</span>array<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">      8</span> 
-<span class="ansi-green-intense-fg ansi-bold">      9</span>     <span class="ansi-green-fg">return</span> predictions
 
-<span class="ansi-green-fg">~/anaconda3/envs/pytorch_p36/lib/python3.6/site-packages/sagemaker/predictor.py</span> in <span class="ansi-cyan-fg">predict</span><span class="ansi-blue-fg">(self, data, initial_args, target_model, target_variant)</span>
-<span class="ansi-green-intense-fg ansi-bold">    111</span> 
-<span class="ansi-green-intense-fg ansi-bold">    112</span>         request_args <span class="ansi-blue-fg">=</span> self<span class="ansi-blue-fg">.</span>_create_request_args<span class="ansi-blue-fg">(</span>data<span class="ansi-blue-fg">,</span> initial_args<span class="ansi-blue-fg">,</span> target_model<span class="ansi-blue-fg">,</span> target_variant<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-fg">--&gt; 113</span><span class="ansi-red-fg">         </span>response <span class="ansi-blue-fg">=</span> self<span class="ansi-blue-fg">.</span>sagemaker_session<span class="ansi-blue-fg">.</span>sagemaker_runtime_client<span class="ansi-blue-fg">.</span>invoke_endpoint<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">**</span>request_args<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">    114</span>         <span class="ansi-green-fg">return</span> self<span class="ansi-blue-fg">.</span>_handle_response<span class="ansi-blue-fg">(</span>response<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">    115</span> 
-
-<span class="ansi-green-fg">~/anaconda3/envs/pytorch_p36/lib/python3.6/site-packages/botocore/client.py</span> in <span class="ansi-cyan-fg">_api_call</span><span class="ansi-blue-fg">(self, *args, **kwargs)</span>
-<span class="ansi-green-intense-fg ansi-bold">    384</span>                     &#34;%s() only accepts keyword arguments.&#34; % py_operation_name)
-<span class="ansi-green-intense-fg ansi-bold">    385</span>             <span class="ansi-red-fg"># The &#34;self&#34; in this scope is referring to the BaseClient.</span>
-<span class="ansi-green-fg">--&gt; 386</span><span class="ansi-red-fg">             </span><span class="ansi-green-fg">return</span> self<span class="ansi-blue-fg">.</span>_make_api_call<span class="ansi-blue-fg">(</span>operation_name<span class="ansi-blue-fg">,</span> kwargs<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">    387</span> 
-<span class="ansi-green-intense-fg ansi-bold">    388</span>         _api_call<span class="ansi-blue-fg">.</span>__name__ <span class="ansi-blue-fg">=</span> str<span class="ansi-blue-fg">(</span>py_operation_name<span class="ansi-blue-fg">)</span>
-
-<span class="ansi-green-fg">~/anaconda3/envs/pytorch_p36/lib/python3.6/site-packages/botocore/client.py</span> in <span class="ansi-cyan-fg">_make_api_call</span><span class="ansi-blue-fg">(self, operation_name, api_params)</span>
-<span class="ansi-green-intense-fg ansi-bold">    703</span>             error_code <span class="ansi-blue-fg">=</span> parsed_response<span class="ansi-blue-fg">.</span>get<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">&#34;Error&#34;</span><span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">{</span><span class="ansi-blue-fg">}</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">.</span>get<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">&#34;Code&#34;</span><span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">    704</span>             error_class <span class="ansi-blue-fg">=</span> self<span class="ansi-blue-fg">.</span>exceptions<span class="ansi-blue-fg">.</span>from_code<span class="ansi-blue-fg">(</span>error_code<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-fg">--&gt; 705</span><span class="ansi-red-fg">             </span><span class="ansi-green-fg">raise</span> error_class<span class="ansi-blue-fg">(</span>parsed_response<span class="ansi-blue-fg">,</span> operation_name<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">    706</span>         <span class="ansi-green-fg">else</span><span class="ansi-blue-fg">:</span>
-<span class="ansi-green-intense-fg ansi-bold">    707</span>             <span class="ansi-green-fg">return</span> parsed_response
-
-<span class="ansi-red-fg">ModelError</span>: An error occurred (ModelError) when calling the InvokeEndpoint operation: Received server error (500) from model with message &#34;&lt;html&gt;
-  &lt;head&gt;
-    &lt;title&gt;Internal Server Error&lt;/title&gt;
-  &lt;/head&gt;
-  &lt;body&gt;
-    &lt;h1&gt;&lt;p&gt;Internal Server Error&lt;/p&gt;&lt;/h1&gt;
-    
-  &lt;/body&gt;
-&lt;/html&gt;
-&#34;. See https://us-east-2.console.aws.amazon.com/cloudwatch/home?region=us-east-2#logEventViewer:group=/aws/sagemaker/Endpoints/sagemaker-pytorch-2021-08-02-11-41-18-995 in account 863125154910 for more information.</pre>
-</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>0.84432</pre>
 </div>
 
 </div>
-</div>
 
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">accuracy_score</span>
-<span class="n">accuracy_score</span><span class="p">(</span><span class="n">test_y</span><span class="p">,</span> <span class="n">predictions</span><span class="p">)</span>
-</pre></div>
-
-    </div>
 </div>
 </div>
 
@@ -14798,7 +14758,7 @@ I think this model performs better than the XGBoost model, but both have a nice 
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[35]:</div>
+<div class="prompt input_prompt">In&nbsp;[53]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">test_review</span> <span class="o">=</span> <span class="s1">&#39;The simplest pleasures in life are the best, and this film is one of them. Combining a rather basic storyline of love and adventure this movie transcends the usual weekend fair with wit and unmitigated charm.&#39;</span>
@@ -14826,7 +14786,7 @@ I think this model performs better than the XGBoost model, but both have a nice 
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[36]:</div>
+<div class="prompt input_prompt">In&nbsp;[54]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># TODO: Convert test_review into a form usable by the model and save the results in test_data</span>
@@ -14849,7 +14809,7 @@ I think this model performs better than the XGBoost model, but both have a nice 
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[37]:</div>
+<div class="prompt input_prompt">In&nbsp;[55]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">predictor</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">test_data</span><span class="p">)</span>
@@ -14865,7 +14825,7 @@ I think this model performs better than the XGBoost model, but both have a nice 
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[37]:</div>
+    <div class="prompt output_prompt">Out[55]:</div>
 
 
 
@@ -14898,7 +14858,7 @@ I think this model performs better than the XGBoost model, but both have a nice 
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[38]:</div>
+<div class="prompt input_prompt">In&nbsp;[56]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">estimator</span><span class="o">.</span><span class="n">delete_endpoint</span><span class="p">()</span>
@@ -14948,7 +14908,7 @@ I think this model performs better than the XGBoost model, but both have a nice 
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[39]:</div>
+<div class="prompt input_prompt">In&nbsp;[57]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span>pygmentize serve/predict.py
@@ -15090,7 +15050,7 @@ I think this model performs better than the XGBoost model, but both have a nice 
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[41]:</div>
+<div class="prompt input_prompt">In&nbsp;[58]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sagemaker.predictor</span> <span class="kn">import</span> <span class="n">RealTimePredictor</span>
@@ -15135,7 +15095,7 @@ I think this model performs better than the XGBoost model, but both have a nice 
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>-------------!</pre>
+<pre>------!</pre>
 </div>
 </div>
 
@@ -15153,7 +15113,7 @@ I think this model performs better than the XGBoost model, but both have a nice 
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[42]:</div>
+<div class="prompt input_prompt">In&nbsp;[59]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">glob</span>
@@ -15202,7 +15162,7 @@ I think this model performs better than the XGBoost model, but both have a nice 
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[43]:</div>
+<div class="prompt input_prompt">In&nbsp;[60]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">ground</span><span class="p">,</span> <span class="n">results</span> <span class="o">=</span> <span class="n">test_reviews</span><span class="p">()</span>
@@ -15234,7 +15194,7 @@ Starting  neg  files
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[44]:</div>
+<div class="prompt input_prompt">In&nbsp;[61]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">accuracy_score</span>
@@ -15251,7 +15211,7 @@ Starting  neg  files
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[44]:</div>
+    <div class="prompt output_prompt">Out[61]:</div>
 
 
 
@@ -15276,7 +15236,7 @@ Starting  neg  files
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[45]:</div>
+<div class="prompt input_prompt">In&nbsp;[62]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">predictor</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">test_review</span><span class="p">)</span>
@@ -15292,7 +15252,7 @@ Starting  neg  files
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[45]:</div>
+    <div class="prompt output_prompt">Out[62]:</div>
 
 
 
@@ -15363,13 +15323,33 @@ Starting  neg  files
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[63]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">predictor</span><span class="o">.</span><span class="n">endpoint</span>
 </pre></div>
 
     </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[63]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>&#39;sagemaker-pytorch-2021-08-02-13-49-53-397&#39;</pre>
+</div>
+
+</div>
+
 </div>
 </div>
 
@@ -15417,7 +15397,11 @@ Starting  neg  files
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><strong>Answer:</strong></p>
+<p><strong>Answer:</strong>
+Review: "I enjoyed and LOVED this film so much!!!!! The story is always unique and fun, the theme about love and support of your child passion and letting them what they want to do, and the effects. I'm loving everything and I mean EVERYTHING about this film."
+Response: "Positive !"</p>
+<p>Review: "The biggest disappointment ever, if you've seen the trailers you've basically seen the movie."
+Response: "Negative !"</p>
 
 </div>
 </div>
@@ -15432,7 +15416,7 @@ Starting  neg  files
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[46]:</div>
+<div class="prompt input_prompt">In&nbsp;[64]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">predictor</span><span class="o">.</span><span class="n">delete_endpoint</span><span class="p">()</span>
