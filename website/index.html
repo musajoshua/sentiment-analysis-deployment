@@ -13,7 +13,6 @@
          function submitForm(oFormElement) {
              var xhr = new XMLHttpRequest();
              xhr.onload = function() {
-                 console.log('a')
                  var result = parseFloat(xhr.responseText);
                  var resultElement = document.getElementById('result');
                  if (result == 0) {
@@ -27,7 +26,6 @@
              xhr.open (oFormElement.method, oFormElement.action, true);
              var review = document.getElementById('review');
              xhr.send (review.value);
-             
              return false;
          }
         </script>
@@ -39,7 +37,7 @@
             <h1>Is your review positive, or negative?</h1>
             <p>Enter your review below and click submit to find out...</p>
             <form method="POST"
-                  action="https://cz6q136vxe.execute-api.us-east-2.amazonaws.com/prod"
+                  action="https://s8lgadsvc3.execute-api.us-east-2.amazonaws.com/prod"
                   onsubmit="return submitForm(this);" >                     <!-- HERE IS WHERE YOU NEED TO ENTER THE API URL -->
                 <div class="form-group">
                     <label for="review">Review:</label>
